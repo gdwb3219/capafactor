@@ -55,7 +55,7 @@ function ChartDetailPage() {
       selectedSite: currentSite,
     };
     console.log('ChartDetailPage navigate state:', stateToSend); // 로그 추가
-    navigate(-1, {
+    navigate('/', {
       state: stateToSend,
     }); // 이전 페이지로 돌아감 (차트 그리드)
   };
