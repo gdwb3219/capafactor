@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import AreaTabs from './AreaTabs';
 import { useLocation } from 'react-router-dom';
+import { convertArrayToCSV, downloadCSV } from '../../utils/csvUtils';
+import { Button } from '@mui/material';
 
 function Dashboard({ data }) {
   const [areas, setAreas] = useState([]);
@@ -23,6 +25,12 @@ function Dashboard({ data }) {
     setAreas(uniqueAreas);
   }, [data]);
 
+  const handleDownloadCSV = () => {
+    const headers = Object.keys(data[0] || {});
+    const csvData = convertArrayToCSV(data, headers);
+    downloadCSV(csvData, 'dashboard_data.csv');
+  };
+
   useEffect(() => {
     console.log('Dashboard location changed:', location); // 로깅 추가
     console.log('Dashboard location.state on change:', location.state); // 로깅 추가
@@ -33,6 +41,14 @@ function Dashboard({ data }) {
   return (
     <div>
       <h1>대시보드</h1>
+      <Button
+        onClick={handleDownloadCSV}
+        variant="contained"
+        color="primary"
+        style={{ marginBottom: '16px' }}
+      >
+        CSV 다운로드
+      </Button>
       <AreaTabs
         areas={areas}
         data={data}
