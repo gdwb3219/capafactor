@@ -1,10 +1,18 @@
 // src/SiteTabs.jsx
-import React, { useState } from "react";
-import { Tabs, Tab } from "@mui/material";
-import FactorGrid from "./FactorGrid";
+import React, { useEffect, useState } from 'react';
+import { Tabs, Tab } from '@mui/material';
+import FactorGrid from './FactorGrid';
 
-function SiteTabs({ sites, data }) {
-  const [selectedSite, setSelectedSite] = useState(sites[0] || "");
+function SiteTabs({ sites, data, currentArea, initialSelectedSite }) {
+  const [selectedSite, setSelectedSite] = useState(
+    initialSelectedSite || sites[0] || ''
+  );
+
+  useEffect(() => {
+    if (initialSelectedSite && sites.includes(initialSelectedSite)) {
+      setSelectedSite(initialSelectedSite);
+    }
+  }, [initialSelectedSite, sites]);
 
   const handleSiteChange = (event, newSite) => {
     setSelectedSite(newSite);
@@ -17,13 +25,19 @@ function SiteTabs({ sites, data }) {
       <Tabs
         value={selectedSite}
         onChange={handleSiteChange}
-        aria-label='site tabs'
+        aria-label="site tabs"
       >
         {sites.map((site) => (
           <Tab key={site} value={site} label={site} />
         ))}
       </Tabs>
-      {selectedSite && <FactorGrid data={filteredDataBySite} />}
+      {selectedSite && (
+        <FactorGrid
+          data={filteredDataBySite}
+          currentArea={currentArea}
+          currentSite={selectedSite}
+        />
+      )}
     </div>
   );
 }

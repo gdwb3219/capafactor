@@ -1,6 +1,6 @@
 // src/FactorChart.jsx
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   LineChart,
   Line,
@@ -9,13 +9,13 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-} from "recharts";
+} from 'recharts';
 
-function FactorChart({ data, factor, oper }) {
+function FactorChart({ data, factor, oper, currentArea, currentSite }) {
   const navigate = useNavigate();
 
   // 월별, System별 해당 factor 값으로 데이터 재구성
-  console.log(data, "왜 Oper만 필터를 했지?");
+
   const chartData = data.reduce((acc, item) => {
     const month = String(item.Month);
     const system = item.System;
@@ -41,23 +41,23 @@ function FactorChart({ data, factor, oper }) {
   const handleChartClick = () => {
     const encoderOper = encodeURIComponent(oper);
     navigate(`/chart/${encoderOper}/${factor}`, {
-      state: { chartData, factor, oper },
+      state: { chartData, factor, oper, currentArea, currentSite },
     });
   };
 
   return (
-    <div onClick={handleChartClick} style={{ cursor: "pointer" }}>
+    <div onClick={handleChartClick} style={{ cursor: 'pointer' }}>
       <p>{factor}</p>
       <LineChart width={300} height={200} data={chartData}>
-        <CartesianGrid strokeDasharray='3 3' />
-        <XAxis dataKey='Month' />
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="Month" />
         <YAxis />
         <Tooltip />
         <Legend />
         {systems.map((system) => (
           <Line
             key={system}
-            type='monotone'
+            type="monotone"
             dataKey={system}
             stroke={`#${Math.floor(Math.random() * 16777215).toString(16)}`}
             strokeWidth={2}

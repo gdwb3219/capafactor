@@ -1,11 +1,11 @@
 // src/FactorGrid.jsx
-import React from "react";
-import { Grid } from "@mui/material";
-import FactorChart from "./FactorChart";
+import React from 'react';
+import { Grid } from '@mui/material';
+import FactorChart from './FactorChart';
 
-const factors = ["CapaEff", "NoWip", "Linearity", "Loss"];
+const factors = ['CapaEff', 'NoWip', 'Linearity', 'Loss'];
 
-function FactorGrid({ data }) {
+function FactorGrid({ data, currentArea, currentSite }) {
   // 데이터에서 고유한 공정 목록 추출 (예시: 'B/G'와 같은 'Oper' 값)
   const uniqueOpers = [...new Set(data.map((item) => item.Oper))];
 
@@ -21,6 +21,8 @@ function FactorGrid({ data }) {
                   data={data.filter((item) => item.Oper === oper)}
                   factor={factor}
                   oper={oper}
+                  currentArea={currentArea}
+                  currentSite={currentSite}
                 />
               </Grid>
             ))}

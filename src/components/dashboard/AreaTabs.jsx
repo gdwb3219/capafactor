@@ -1,10 +1,18 @@
 // src/AreaTabs.jsx
-import React, { useState } from "react";
-import { Tabs, Tab } from "@mui/material";
-import SiteTabs from "./SiteTabs";
+import React, { useEffect, useState } from 'react';
+import { Tabs, Tab } from '@mui/material';
+import SiteTabs from './SiteTabs';
 
-function AreaTabs({ areas, data }) {
-  const [selectedArea, setSelectedArea] = useState(areas[0] || "");
+function AreaTabs({ areas, data, initialSelectedArea, initialSelectedSite }) {
+  const [selectedArea, setSelectedArea] = useState(
+    initialSelectedArea || areas[0] || ''
+  );
+
+  useEffect(() => {
+    if (initialSelectedArea && areas.includes(initialSelectedArea)) {
+      setSelectedArea(initialSelectedArea);
+    }
+  }, [initialSelectedArea, areas]);
 
   const handleAreaChange = (event, newArea) => {
     setSelectedArea(newArea);
@@ -22,14 +30,19 @@ function AreaTabs({ areas, data }) {
       <Tabs
         value={selectedArea}
         onChange={handleAreaChange}
-        aria-label='area tabs'
+        aria-label="area tabs"
       >
         {areas.map((area) => (
           <Tab key={area} value={area} label={area} />
         ))}
       </Tabs>
       {selectedArea && (
-        <SiteTabs sites={uniqueSitesInArea} data={filteredDataByArea} />
+        <SiteTabs
+          sites={uniqueSitesInArea}
+          data={filteredDataByArea}
+          currentArea={selectedArea}
+          initialSelectedSite={initialSelectedSite}
+        />
       )}
     </div>
   );
