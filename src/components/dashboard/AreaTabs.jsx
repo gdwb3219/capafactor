@@ -1,6 +1,6 @@
 // src/AreaTabs.jsx
 import React, { useEffect, useState } from 'react';
-import { Tabs, Tab } from '@mui/material';
+import { Tabs, Tab, Box } from '@mui/material';
 import SiteTabs from './SiteTabs';
 
 function AreaTabs({ areas, data, initialSelectedArea, initialSelectedSite }) {
@@ -26,25 +26,61 @@ function AreaTabs({ areas, data, initialSelectedArea, initialSelectedSite }) {
   ];
 
   return (
-    <div>
-      <Tabs
-        value={selectedArea}
-        onChange={handleAreaChange}
-        aria-label="area tabs"
+    <Box sx={{ display: 'flex' }}>
+      <Box
+        sx={{
+          color: 'white',
+          display: 'flex',
+          flexDirection: 'column',
+          backgroundColor: '#151422',
+          minHeight: '100vh',
+          position: 'fixed',
+          minWidth: '200px',
+        }}
       >
-        {areas.map((area) => (
-          <Tab key={area} value={area} label={area} />
-        ))}
-      </Tabs>
-      {selectedArea && (
-        <SiteTabs
-          sites={uniqueSitesInArea}
-          data={filteredDataByArea}
-          currentArea={selectedArea}
-          initialSelectedSite={initialSelectedSite}
-        />
-      )}
-    </div>
+        <Box>Logo</Box>
+        <Tabs
+          orientation="vertical"
+          value={selectedArea}
+          onChange={handleAreaChange}
+          aria-label="area tabs"
+          sx={{
+            borderRight: 1,
+            borderColor: 'divider',
+            minWidth: 150,
+            minHeight: 700,
+          }}
+        >
+          {areas.map((area) => (
+            <Tab
+              key={area}
+              value={area}
+              label={area}
+              sx={{
+                color: 'white',
+                '&.Mui-selected': {
+                  color: 'green',
+                  fontWeight: 'bold',
+                  backgroundColor: 'lightyellow',
+                  border: 0,
+                },
+              }}
+            />
+          ))}
+        </Tabs>
+        under
+      </Box>
+      <Box sx={{ flexGrow: 1, p: 3, marginLeft: '250px' }}>
+        {selectedArea && (
+          <SiteTabs
+            sites={uniqueSitesInArea}
+            data={filteredDataByArea}
+            currentArea={selectedArea}
+            initialSelectedSite={initialSelectedSite}
+          />
+        )}
+      </Box>
+    </Box>
   );
 }
 
