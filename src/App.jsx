@@ -1,16 +1,21 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Dashboard from "./components/dashboard/Dashboard";
-import dummyData from "./data/dummyData.json";
-import ChartDetailPage from "./pages/ChartDetailPage";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import LayoutBoard from './components/component/LayoutBoard';
+import Dashboard from './components/dashboard/Dashboard';
+import dummyData from './data/dummyData.json';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Dashboard data={dummyData} />} />
-        <Route path='/chart/:oper/:factor' element={<ChartDetailPage />} />
-      </Routes>
-    </BrowserRouter>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LayoutBoard />}>
+            <Route index element={<HomePage />} />
+            <Route path="dashboard" element={<Dashboard data={dummyData} />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 

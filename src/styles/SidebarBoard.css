@@ -1,0 +1,33 @@
+.sidebar {
+  width: 260px;
+  background-color: #f4f4f4;
+  border-right: 1px solid #ddd;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar nav li {
+  margin-bottom: 10px;
+}
+
+.sidebar nav a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+.sidebar nav a:hover {
+  background-color: #e0e0e0;
+}
+
+.sidebar nav a.active-link {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}

@@ -1,6 +1,5 @@
-// src/ChartDetailPage.jsx
+// src/ChartDetailView.jsx
 import React from 'react';
-import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import {
   LineChart,
   Line,
@@ -20,24 +19,17 @@ import {
   Paper,
   Button,
 } from '@mui/material';
+import '../dashboardCSS/ChartDetailView.css';
 
-function ChartDetailPage() {
-  const navigate = useNavigate();
-  const { oper: encodedOper, factor } = useParams(); // useParams로 인코딩된 oper 값을 가져옴
-  const location = useLocation();
-  const { chartData, currentArea, currentSite } = location.state || {};
-  const oper = decodeURIComponent(encodedOper); // 디코딩
-
+function ChartDetailView({ chartData, factor, oper, onClose, systemColors }) {
   if (!chartData || !factor || !oper) {
-    return <div>잘못된 접근입니다.</div>;
+    return <div>상세 데이터를 불러올 수 없습니다.</div>;
   }
 
-  // 데이터에 존재하는 System 목록 추출
   const systems = Object.keys(chartData[0] || {}).filter(
     (key) => key !== 'Month'
   );
 
-  // 테이블 데이터 전치
   const transposedTableData = systems.map((system) => {
     const rowData = { System: system };
     chartData.forEach((item) => {
@@ -46,22 +38,13 @@ function ChartDetailPage() {
     return rowData;
   });
 
-  // 테이블 헤더 (월 목록)
   const tableHeaders = ['System', ...chartData.map((item) => item.Month)];
 
-  const handleClose = () => {
-    const stateToSend = {
-      selectedArea: currentArea,
-      selectedSite: currentSite,
-    };
-    console.log('ChartDetailPage navigate state:', stateToSend); // 로그 추가
-    navigate('/', {
-      state: stateToSend,
-    }); // 이전 페이지로 돌아감 (차트 그리드)
-  };
-
   return (
-    <div>
+    <div className="chart-detail-view-container">
+      <Button className="X-button" onClick={onClose}>
+        닫기
+      </Button>
       <h2>
         {oper} - {factor} 상세 차트
       </h2>
@@ -76,8 +59,9 @@ function ChartDetailPage() {
             key={system}
             type="monotone"
             dataKey={system}
-            stroke={`#${Math.floor(Math.random() * 16777215).toString(16)}`}
+            stroke={systemColors[system] || '#000'}
             strokeWidth={2}
+            animationDuration={700}
           />
         ))}
       </LineChart>
@@ -88,20 +72,18 @@ function ChartDetailPage() {
           <TableHead>
             <TableRow>
               {tableHeaders.map((header) => (
-                <TableCell key={header} align="center">
-                  {header}
-                </TableCell>
+                <TableCell key={header}>{header}</TableCell>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
             {transposedTableData.map((row) => (
               <TableRow key={row.System}>
-                <TableCell component="th" scope="row" align="center">
+                <TableCell component="th" scope="row">
                   {row.System}
                 </TableCell>
                 {tableHeaders.slice(1).map((month) => (
-                  <TableCell key={month} align="center">
+                  <TableCell key={month} align="right">
                     {row[month]}
                   </TableCell>
                 ))}
@@ -110,10 +92,8 @@ function ChartDetailPage() {
           </TableBody>
         </Table>
       </TableContainer>
-
-      <Button onClick={handleClose}>닫기</Button>
     </div>
   );
 }
 
-export default ChartDetailPage;
+export default ChartDetailView;

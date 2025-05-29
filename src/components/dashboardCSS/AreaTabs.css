@@ -3,6 +3,7 @@
   display: flex; /* 탭 목록과 콘텐츠를 가로로 배치 */
   border: 1px solid #ccc; /* 전체 컨테이너 테두리 (선택 사항) */
   overflow: hidden; /* 내용이 넘칠 경우 숨김 처리 (선택 사항) */
+  /* width: 500px; */
 }
 
 .tab-list.vertical {

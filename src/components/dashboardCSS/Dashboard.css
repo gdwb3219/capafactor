@@ -1,7 +1,8 @@
 .dashboard-container {
   /* background-color: orange; */
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .side-bar {

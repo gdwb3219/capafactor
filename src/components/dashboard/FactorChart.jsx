@@ -1,6 +1,4 @@
 // src/FactorChart.jsx
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
   LineChart,
   Line,
@@ -10,12 +8,10 @@ import {
   Tooltip,
   Legend,
 } from 'recharts';
+import '../dashboardCSS/FactorChart.css';
 
-function FactorChart({ data, factor, oper, currentArea, currentSite }) {
-  const navigate = useNavigate();
-
+function FactorChart({ data, factor, oper, onClick }) {
   // 월별, System별 해당 factor 값으로 데이터 재구성
-
   const chartData = data.reduce((acc, item) => {
     const month = String(item.Month);
     const system = item.System;
@@ -39,14 +35,22 @@ function FactorChart({ data, factor, oper, currentArea, currentSite }) {
 
   // chart 클릭하면 handler
   const handleChartClick = () => {
-    const encoderOper = encodeURIComponent(oper);
-    navigate(`/chart/${encoderOper}/${factor}`, {
-      state: { chartData, factor, oper, currentArea, currentSite },
-    });
+    onClick(oper, factor, chartData);
+  };
+
+  const systemColors = {
+    GMS: 'red',
+    EMS: 'orange',
+    RPT: 'green',
+    CIM: 'blue',
   };
 
   return (
-    <div onClick={handleChartClick} style={{ cursor: 'pointer' }}>
+    <div
+      className="chart-card"
+      onClick={handleChartClick}
+      style={{ cursor: 'pointer' }}
+    >
       <p>{factor}</p>
       <LineChart width={300} height={200} data={chartData}>
         <CartesianGrid strokeDasharray="3 3" />
@@ -59,8 +63,9 @@ function FactorChart({ data, factor, oper, currentArea, currentSite }) {
             key={system}
             type="monotone"
             dataKey={system}
-            stroke={`#${Math.floor(Math.random() * 16777215).toString(16)}`}
+            stroke={systemColors[system] || '#000'}
             strokeWidth={2}
+            animationDuration={500}
           />
         ))}
       </LineChart>
