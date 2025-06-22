@@ -1,6 +1,6 @@
 // src/ChartDetailPage.jsx
-import React from 'react';
-import { useNavigate, useLocation, useParams } from 'react-router-dom';
+import React from "react";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import {
   LineChart,
   Line,
@@ -9,7 +9,7 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-} from 'recharts';
+} from "recharts";
 import {
   Table,
   TableBody,
@@ -19,7 +19,7 @@ import {
   TableRow,
   Paper,
   Button,
-} from '@mui/material';
+} from "@mui/material";
 
 function ChartDetailPage() {
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ function ChartDetailPage() {
 
   // 데이터에 존재하는 System 목록 추출
   const systems = Object.keys(chartData[0] || {}).filter(
-    (key) => key !== 'Month'
+    (key) => key !== "Month"
   );
 
   // 테이블 데이터 전치
@@ -47,34 +47,34 @@ function ChartDetailPage() {
   });
 
   // 테이블 헤더 (월 목록)
-  const tableHeaders = ['System', ...chartData.map((item) => item.Month)];
+  const tableHeaders = ["System", ...chartData.map((item) => item.Month)];
 
   const handleClose = () => {
     const stateToSend = {
       selectedArea: currentArea,
       selectedSite: currentSite,
     };
-    console.log('ChartDetailPage navigate state:', stateToSend); // 로그 추가
-    navigate('/', {
+    console.log("ChartDetailPage navigate state:", stateToSend); // 로그 추가
+    navigate("/", {
       state: stateToSend,
     }); // 이전 페이지로 돌아감 (차트 그리드)
   };
 
   return (
-    <div>
-      <h2>
-        {oper} - {factor} 상세 차트
-      </h2>
+    <div className='d-view-container'>
+      <h3>
+        {oper} - {factor} Detail View
+      </h3>
       <LineChart width={800} height={400} data={chartData}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="Month" />
+        <CartesianGrid strokeDasharray='3 3' />
+        <XAxis dataKey='Month' />
         <YAxis />
         <Tooltip />
         <Legend />
         {systems.map((system) => (
           <Line
             key={system}
-            type="monotone"
+            type='monotone'
             dataKey={system}
             stroke={`#${Math.floor(Math.random() * 16777215).toString(16)}`}
             strokeWidth={2}
@@ -84,11 +84,11 @@ function ChartDetailPage() {
 
       <h3>데이터 테이블</h3>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="transposed table">
+        <Table sx={{ minWidth: 650 }} aria-label='transposed table'>
           <TableHead>
             <TableRow>
               {tableHeaders.map((header) => (
-                <TableCell key={header} align="center">
+                <TableCell key={header} align='center'>
                   {header}
                 </TableCell>
               ))}
@@ -97,11 +97,11 @@ function ChartDetailPage() {
           <TableBody>
             {transposedTableData.map((row) => (
               <TableRow key={row.System}>
-                <TableCell component="th" scope="row" align="center">
+                <TableCell component='th' scope='row' align='center'>
                   {row.System}
                 </TableCell>
                 {tableHeaders.slice(1).map((month) => (
-                  <TableCell key={month} align="center">
+                  <TableCell key={month} align='center'>
                     {row[month]}
                   </TableCell>
                 ))}

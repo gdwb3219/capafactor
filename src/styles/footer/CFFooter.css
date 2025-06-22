@@ -1,0 +1,18 @@
+.footer-container {
+  background-color: rgb(35, 35, 35);
+  height: 200px;
+  width: 100vw;
+}
+
+.upper-text {
+  background-color: skyblue;
+  position: relative;
+  top: 50px;
+  text-align: center;
+}
+.lower-text {
+  background-color: yellowgreen;
+  position: relative;
+  top: 100px;
+  text-align: center;
+}

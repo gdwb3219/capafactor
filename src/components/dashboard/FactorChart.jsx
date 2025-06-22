@@ -1,6 +1,6 @@
 // src/FactorChart.jsx
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import {
   LineChart,
   Line,
@@ -9,7 +9,7 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-} from 'recharts';
+} from "recharts";
 
 function FactorChart({ data, factor, oper, currentArea, currentSite }) {
   const navigate = useNavigate();
@@ -46,21 +46,22 @@ function FactorChart({ data, factor, oper, currentArea, currentSite }) {
   };
 
   return (
-    <div onClick={handleChartClick} style={{ cursor: 'pointer' }}>
+    <div onClick={handleChartClick} style={{ cursor: "pointer" }}>
       <p>{factor}</p>
       <LineChart width={300} height={200} data={chartData}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="Month" />
+        <CartesianGrid strokeDasharray='3 3' />
+        <XAxis dataKey='Month' />
         <YAxis />
         <Tooltip />
         <Legend />
         {systems.map((system) => (
           <Line
             key={system}
-            type="monotone"
+            type='monotone'
             dataKey={system}
             stroke={`#${Math.floor(Math.random() * 16777215).toString(16)}`}
             strokeWidth={2}
+            animationDuration={500}
           />
         ))}
       </LineChart>
