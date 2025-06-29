@@ -1,0 +1,15 @@
+.dashboard-container {
+  /* background-color: orange; */
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.side-bar {
+  display: flex;
+  flex-direction: column;
+}
+
+.area-tabs {
+  background-color: orange;
+}

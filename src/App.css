@@ -1,7 +1,7 @@
 /* Basic Reset & Font */
 
 .app-container {
-  min-height: 100vh;
+  /* min-height: 100vh; */
   background: linear-gradient(to bottom right, #e0f2fe, #e0e7ff);
   display: flex;
   flex-direction: row;

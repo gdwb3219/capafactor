@@ -1,0 +1,37 @@
+.sub-navbar {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.sub-navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.sub-navbar li {
+  margin-right: 15px;
+}
+
+.sub-navbar a {
+  text-decoration: none;
+  color: #007bff;
+  padding: 5px 0;
+}
+
+.sub-navbar a:hover {
+  text-decoration: underline;
+}
+
+.sub-navbar a.active-sub-link {
+  font-weight: bold;
+  border-bottom: 2px solid #007bff;
+}
+
+.settings-content,
+.products-content {
+  /* 세부 컨텐츠 영역 스타일 */
+  padding-top: 15px;
+}
