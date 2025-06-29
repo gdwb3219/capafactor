@@ -1,12 +1,12 @@
 .header-container {
   height: 200px;
-  width: 100vw;
+  width: 100%;
   background-color: rgb(77, 77, 77);
 }
 .upper-menu {
   background-color: skyblue;
   height: 50px;
-  width: 80vw;
+  /* width: 80vw; */
   display: flex;
   flex-direction: row;
 }
@@ -19,7 +19,7 @@
 .mid-menu {
   background-color: black;
   height: 20px;
-  width: 70vw;
+  /* width: 70vw; */
 }
 .button-area {
   display: flex;

@@ -4,28 +4,23 @@ import CFHeader from "./header/CFHeader";
 import CFFooter from "./footer/CFFooter";
 import SideNavBar from "./SideNavBar/SideNavBar";
 import dummyData from "../data/dummyData.json";
+import "../styles/LayOuts.css";
 
 function LayOuts() {
   return (
     <div className='layout-container'>
       {/* 사이드 바 */}
-      <div>
-        <SideNavBar dummyData={dummyData} />
-      </div>
+      <SideNavBar data={dummyData} />
       {/* 메인 컨텐츠 영역 */}
-      <div>
+      <div className='right-side'>
         {/* 헤더 */}
-        <div>
-          <CFHeader />
-        </div>
+        <CFHeader />
         {/* 메인 컨텐츠 */}
         <main className='main-container'>
           <Outlet />
         </main>
         {/* 푸터 */}
-        <div>
-          <CFFooter />
-        </div>
+        <CFFooter />
       </div>
     </div>
   );

@@ -1,0 +1,17 @@
+.layout-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  overflow-y: auto;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.main-container {
+  /* flex-grow: 1; */
+}
+
+.right-side {
+  width: 100%;
+  /* flex-grow: 1; */
+}

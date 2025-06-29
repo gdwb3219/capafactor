@@ -1,9 +1,14 @@
 // src/Dashboard.jsx
-import { useLocation } from "react-router-dom";
+import { useLoaderData, useLocation } from "react-router-dom";
 import { convertArrayToCSV, downloadCSV } from "../../utils/csvUtils";
 import { Button } from "@mui/material";
+import FactorGrid from "./FactorGrid";
 
-function Dashboard({ data }) {
+function Dashboard() {
+  // loader 함수에서 반환된 데이터를 useLoaderData 훅으로 가져옴
+  const selectedArea = useLoaderData();
+  console.log("selectedAreaselectedArea", selectedArea);
+
   const location = useLocation();
   // const selectedAreaFromState = location.state?.selectedArea;
   // const selectedSiteFromState = location.state?.selectedSite;
